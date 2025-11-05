@@ -507,8 +507,24 @@ app_Jardineria/templates/cliente/
 ```
 
 **borrar_cliente.html**
-(En este ejemplo el borrado puede realizarse directamente con la vista; si deseas un confirm dialog, puede añadirse.)
+```html
+   {% extends 'base.html' %}
+   {% block content %}
+   <div class="container text-center">
+     <h2 class="mb-4">Eliminar Cliente</h2>
+     <div class="alert alert-danger">
+       <p>¿Estás seguro de que deseas eliminar al cliente <strong>{{ cliente.nombre }} {{ cliente.apellido }}</strong>?</p>
+       <p>Esta acción no se puede deshacer.</p>
+     </div>
+     <form method="POST">
+       {% csrf_token %}
+       <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+       <a href="{% url 'ver_cliente' %}" class="btn btn-secondary">Cancelar</a>
+     </form>
+   </div>
+   {% endblock %}
 
+```
 ---
 
 ### 2️⃣4️⃣ Crear archivo `urls.py` en `app_Jardineria`
